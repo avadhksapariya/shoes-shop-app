@@ -15,7 +15,17 @@ class MyApp extends StatelessWidget {
       title: 'Shoes Shop',
       theme: ThemeData(
         fontFamily: 'Lato',
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromRGBO(254, 206, 1, 1), primary: const Color.fromRGBO(254, 206, 1, 1),),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromRGBO(254, 206, 1, 1),
+          primary: const Color.fromRGBO(254, 206, 1, 1),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            color: Colors.black,
+          ),
+        ),
         inputDecorationTheme: const InputDecorationTheme(
           hintStyle: TextStyle(
             fontWeight: FontWeight.bold,
@@ -24,6 +34,7 @@ class MyApp extends StatelessWidget {
           prefixIconColor: Color.fromRGBO(119, 119, 119, 1),
         ),
         textTheme: const TextTheme(
+          titleLarge: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
           titleMedium: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
@@ -32,8 +43,8 @@ class MyApp extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: 12,
           ),
-        )
-        // useMaterial3: true,
+        ),
+        useMaterial3: true,
       ),
       home: const HomePage(),
     );

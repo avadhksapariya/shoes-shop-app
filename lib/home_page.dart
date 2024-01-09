@@ -30,21 +30,25 @@ class _HomePageState extends State<HomePage> {
       borderSide: BorderSide(
         color: Color.fromRGBO(225, 225, 225, 1),
       ),
-      borderRadius: BorderRadius.horizontal(left: Radius.circular(50),),
+      borderRadius: BorderRadius.horizontal(
+        left: Radius.circular(50),
+      ),
     );
 
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            const Row(
+            Row(
               children: [
                 Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Text('Shoes\nCollection', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(
+                    'Shoes\nCollection',
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search),
@@ -66,11 +70,27 @@ class _HomePageState extends State<HomePage> {
                   final filter = filters[index];
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: GestureDetector(onTap: () {
-                      setState(() {
-                        selectedFilter = filter;
-                      });
-                    }, child: Chip(label: Text(filter), backgroundColor: selectedFilter == filter ? Theme.of(context).colorScheme.primary : const Color.fromRGBO(245, 247, 249, 1), side: const BorderSide(color: Color.fromRGBO(245, 247, 249, 1),), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)), padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10), labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),)),
+                    child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedFilter = filter;
+                          });
+                        },
+                        child: Chip(
+                          label: Text(filter),
+                          backgroundColor: selectedFilter == filter
+                              ? Theme.of(context).colorScheme.primary
+                              : const Color.fromRGBO(245, 247, 249, 1),
+                          side: const BorderSide(
+                            color: Color.fromRGBO(245, 247, 249, 1),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 10),
+                          labelStyle: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                        )),
                   );
                 },
               ),
@@ -80,7 +100,14 @@ class _HomePageState extends State<HomePage> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final product = products[index];
-                  return ProductCard(title: product['title'].toString(), price: product['price'] as double, image: product['imageUrl'].toString(), bgColor: index.isEven ? const Color.fromRGBO(216, 240, 253, 1) : const Color.fromRGBO(245, 247, 249, 1),);
+                  return ProductCard(
+                    title: product['title'].toString(),
+                    price: product['price'] as double,
+                    image: product['imageUrl'].toString(),
+                    bgColor: index.isEven
+                        ? const Color.fromRGBO(216, 240, 253, 1)
+                        : const Color.fromRGBO(245, 247, 249, 1),
+                  );
                 },
               ),
             ),
