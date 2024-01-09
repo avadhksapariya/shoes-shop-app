@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shoes_shop_app/customs/product_card.dart';
+import 'package:shoes_shop_app/dummy_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -70,6 +72,15 @@ class _HomePageState extends State<HomePage> {
                       });
                     }, child: Chip(label: Text(filter), backgroundColor: selectedFilter == filter ? Theme.of(context).colorScheme.primary : const Color.fromRGBO(245, 247, 249, 1), side: const BorderSide(color: Color.fromRGBO(245, 247, 249, 1),), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)), padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10), labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),)),
                   );
+                },
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return ProductCard(title: product['title'].toString(), price: product['price'] as double, image: product['imageUrl'].toString(), bgColor: index.isEven ? const Color.fromRGBO(216, 240, 253, 1) : const Color.fromRGBO(245, 247, 249, 1),);
                 },
               ),
             ),
