@@ -7,7 +7,8 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context).cart;
+    final cart = context.watch<CartProvider>().cart; // both works same
+    //final cart = Provider.of<CartProvider>(context).cart;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cart'),
@@ -22,10 +23,56 @@ class CartPage extends StatelessWidget {
               radius: 30,
             ),
             trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.delete, color: Colors.red,),
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(
+                          'Delete Product',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        content: const Text(
+                            'Are you sure want to remove product from the cart ?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text(
+                              'NO',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.green),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              context
+                                  .read<CartProvider>()
+                                  .removeProduct(cartItem);
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text(
+                              'Yes',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.red),
+                            ),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              icon: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
             ),
-            title: Text(cartItem['title'].toString(), style: Theme.of(context).textTheme.bodySmall,),
+            title: Text(
+              cartItem['title'].toString(),
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
             subtitle: Text('Size: ${cartItem['sizes']}'),
           );
         },
