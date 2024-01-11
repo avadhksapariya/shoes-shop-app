@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_shop_app/cart_provider.dart';
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key, required this.product});
@@ -80,7 +82,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 Padding(
                   padding: const EdgeInsets.all(22.0),
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: onAddProduct,
                     icon: const Icon(
                       Icons.shopping_cart_outlined,
                       color: Colors.black,
@@ -105,4 +107,23 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
     );
   }
+
+  void onAddProduct() {
+    if (selectedSize != 0) {
+      Provider.of<CartProvider>(context, listen: false).addProduct(
+          {
+            'id': widget.product['id'],
+            'title': widget.product['title'],
+            'price': widget.product['price'],
+            'imageUrl': widget.product['imageUrl'],
+            'company': widget.product['company'],
+            'sizes': selectedSize,
+          },
+      );
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Product added successfully !'),),);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please select a size !'),),);
+    }
+  }
+
 }

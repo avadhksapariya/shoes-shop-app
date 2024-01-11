@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-
-import '../dummy_data.dart';
+import 'package:provider/provider.dart';
+import 'package:shoes_shop_app/cart_provider.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<CartProvider>(context).cart;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cart'),
@@ -25,11 +26,10 @@ class CartPage extends StatelessWidget {
               icon: const Icon(Icons.delete, color: Colors.red,),
             ),
             title: Text(cartItem['title'].toString(), style: Theme.of(context).textTheme.bodySmall,),
-            subtitle: Text('Size: ${cartItem['size']}'),
+            subtitle: Text('Size: ${cartItem['sizes']}'),
           );
         },
       ),
     );
   }
-
 }
