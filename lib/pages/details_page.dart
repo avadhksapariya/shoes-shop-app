@@ -31,6 +31,7 @@ class _DetailsPageState extends State<DetailsPage> {
             padding: const EdgeInsets.all(22.0),
             child: Image.asset(
               widget.product['imageUrl'].toString(),
+              height: 250,
             ),
           ),
           const Spacer(
@@ -96,7 +97,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary,
-                      minimumSize: const Size(double.infinity, 35),
+                      fixedSize: const Size(350, 35),
                     ),
                   ),
                 ),
